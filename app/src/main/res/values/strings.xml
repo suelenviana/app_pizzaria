@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Pizzaria do Zé!</string>
+
+
+    <string name="novoPedido">Novo Pedido</string>
+    <string name="cadProduto">Cadastrar Produto</string>
+    <string name="listProduto">Produtos</string>
+    <string name="cadUsuario">Cadastrar Usuário</string>
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="title_activity_cad_produto">Cadastrar Produtos</string>
+    <string name="title_activity_cad_usuario">Cadastrar Usuário</string>
+    <string name="title_activity_novo_pedido">Novo Pedido</string>
+    <string name="title_activity_list_produto">Produtos</string>
+    <string name="title_activity_list_pedidos">Pedidos</string>
+
+    <string name="cadProduto_descricao">Descrição</string>
+    <string name="cadProduto_precoCusto">Preço Custo</string>
+    <string name="cadProduto_precoVenda">Preço Venda</string>
+    <string name="cadProduto_tpProduto">Selecione o Tipo de Produto</string>
+    <string name="cadProduto_tpPizza">Pizza</string>
+    <string name="cadProduto_tpBebida">Bebidas</string>
+    <string name="cadProduto_tpOutro">Outros</string>
+    <string name="cadProduto_salvar">Salvar</string>
+    <string name="cadProduto_limpar">Limpar</string>
+    <string name="cadProduto_cancelar">Cancelar</string>
+
+    <string name="cadUsuario_nomeCompleto">Nome Completo</string>
+    <string name="cadUsuario_email">Email</string>
+    <string name="cadUsuario_numContato">Número de Contato</string>
+    <string name="cadUsuario_funcao">Função</string>
+    <string name="cadUsuario_funcaoGerente">Gerente</string>
+    <string name="cadUsuario_funcaoGarcom">Garçom</string>
+
+    <string name="listProduto_pesquisa">Digite o nome do produto</string>
+    <string name="listProduto_buscar">Buscar</string>
+
+    <string name="novoPedido_usuario">Selecione o Usuário</string>
+    <string name="novoPedido_produto">Selecione o Item</string>
+
+
+
+</resources>

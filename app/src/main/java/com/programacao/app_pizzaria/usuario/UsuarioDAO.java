@@ -10,6 +10,12 @@ import java.util.List;
 public class UsuarioDAO implements DAO<Usuario> {
 
     private static SQLiteDatabase bancoDados = ConexaoBancoDados.getInstance();
+    private static UsuarioDAO instance;
+
+    public static UsuarioDAO getInstance(){
+        if (instance == null) return new UsuarioDAO();
+        return instance;
+    }
 
     @Override
     public void criarTabela() {
@@ -28,7 +34,14 @@ public class UsuarioDAO implements DAO<Usuario> {
 
     @Override
     public void adicionar(Usuario usuario) {
+        String sql = new StringBuilder("INSERT INTO usuarios(nomecompleto, email, telefone, funcao) VALUES (\"")
+                .append(usuario.getNome()).append("\", \"")
+                .append(usuario.getEmail()).append("\", \"")
+                .append(usuario.getTelefone()).append("\", \"")
+                .append(usuario.getFuncao()).append("\")")
+                .toString();
 
+        bancoDados.execSQL(sql);
     }
 
     @Override

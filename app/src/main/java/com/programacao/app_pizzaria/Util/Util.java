@@ -14,6 +14,10 @@ public class Util {
     public static final String CADPRODUTO_VALIDA_PRECO_CUSTO = "Necessáro preencher o Preço de Custo!";
     public static final String CADPRODUTO_VALIDA_TIPO_PRODUTO = "Necessáro preencher o Tipo de Produto!";
 
+    public static final String CADUSUARIO_VALIDA_NOME = "Necessário preencher o Nome";
+    public static final String CADUSUARIO_VALIDA_EMAIL = "Necessário preencher o E-mail";
+    public static final String CADUSUARIO_VALIDA_TELEFONE = "Necessário preencher o Número de Contato";
+    public static final String CADUSUARIO_VALIDA_FUNCAO = "Necessário preencher a Função";
 
     public static Util getInstance() {
         if (instance != null) return instance;

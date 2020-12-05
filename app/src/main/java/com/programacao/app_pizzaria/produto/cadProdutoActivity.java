@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.programacao.app_pizzaria.MainActivity;
 import com.programacao.app_pizzaria.R;
 import com.programacao.app_pizzaria.Util.Util;
+import com.programacao.app_pizzaria.usuario.UsuarioDAO;
 
 public class cadProdutoActivity extends AppCompatActivity {
 

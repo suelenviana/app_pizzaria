@@ -43,16 +43,16 @@ public class cadProdutoActivity extends AppCompatActivity {
 
     public boolean validaProduto(Produto produto) {
         if (produto.getDescricao() == null || produto.getDescricao().isEmpty()) {
-            Util.getInstance().mostraMensagem(Util.CADPRODUTO_VALIDA_DESCRICAO);
+            Util.getInstance().mostraMensagem(getBaseContext(), Util.CADPRODUTO_VALIDA_DESCRICAO);
             return false;
         } else if (produto.getPrecoVenda() == null || produto.getPrecoVenda().isEmpty()) {
-            Util.getInstance().mostraMensagem(Util.CADPRODUTO_VALIDA_PRECO_VENDA);
+            Util.getInstance().mostraMensagem(getBaseContext(), Util.CADPRODUTO_VALIDA_PRECO_VENDA);
             return false;
         } else if (produto.getPrecoCusto() == null || produto.getPrecoCusto().isEmpty()) {
-            Util.getInstance().mostraMensagem(Util.CADPRODUTO_VALIDA_PRECO_CUSTO);
+            Util.getInstance().mostraMensagem(getBaseContext(), Util.CADPRODUTO_VALIDA_PRECO_CUSTO);
             return false;
         } else if (produto.getTipoProduto() == null || produto.getTipoProduto().isEmpty()) {
-            Util.getInstance().mostraMensagem(Util.CADPRODUTO_VALIDA_TIPO_PRODUTO);
+            Util.getInstance().mostraMensagem(getBaseContext(), Util.CADPRODUTO_VALIDA_TIPO_PRODUTO);
             return false;
         }
         return true;

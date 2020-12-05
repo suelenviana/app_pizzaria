@@ -1,10 +1,11 @@
 package com.programacao.app_pizzaria.Util;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Util extends AppCompatActivity {
+public class Util {
 
     private static Util instance;
 
@@ -19,8 +20,8 @@ public class Util extends AppCompatActivity {
         return new Util();
     }
 
-    public void mostraMensagem(String mensagem) {
-        Toast.makeText(getBaseContext(), mensagem, Toast.LENGTH_LONG).show();
+    public void mostraMensagem(Context context, String mensagem) {
+        Toast.makeText(context, mensagem, Toast.LENGTH_LONG).show();
     }
 
 }

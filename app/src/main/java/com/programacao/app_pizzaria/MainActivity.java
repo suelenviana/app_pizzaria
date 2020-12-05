@@ -9,6 +9,7 @@ import com.programacao.app_pizzaria.pedido.novoPedidoActivity;
 import com.programacao.app_pizzaria.produto.ProdutoDAO;
 import com.programacao.app_pizzaria.produto.cadProdutoActivity;
 import com.programacao.app_pizzaria.produto.listProdutoActivity;
+import com.programacao.app_pizzaria.usuario.UsuarioDAO;
 import com.programacao.app_pizzaria.usuario.cadUsuarioActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btListProduto = findViewById(R.id.button_listProduto);
         btCadUsuario = findViewById(R.id.button_cadUsuario);
         ProdutoDAO.getInstance().criarTabela();
-
+        UsuarioDAO.getInstance().criarTabela();
 
     }
 

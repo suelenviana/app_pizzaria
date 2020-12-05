@@ -53,6 +53,7 @@ public class cadUsuarioActivity extends AppCompatActivity {
                 salvar();
                 break;
             case R.id.btLimpar:
+                limpar();
                 break;
             case R.id.btCancelar:
                 intent = new Intent(cadUsuarioActivity.this, MainActivity.class);
@@ -76,6 +77,8 @@ public class cadUsuarioActivity extends AppCompatActivity {
         if(validaUsuario(usuario)) {
             //insert
             UsuarioDAO.getInstance().adicionar(usuario);
+            limpar();
+            Util.getInstance().mostraMensagemSnackBar(findViewById(R.id.activity_cad_usuario), Util.CADUSUARIO_SALVAR_SUCESSO);
         }
 
     }
@@ -95,5 +98,12 @@ public class cadUsuarioActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public void limpar() {
+        nomeCompletoE.setText("");
+        emailE.setText("");
+        telefoneE.setText("");
+        funcaoGroup.check(-1);
     }
 }

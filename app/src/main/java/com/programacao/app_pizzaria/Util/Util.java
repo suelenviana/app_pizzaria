@@ -1,9 +1,12 @@
 package com.programacao.app_pizzaria.Util;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class Util {
 
@@ -18,7 +21,7 @@ public class Util {
     public static final String CADUSUARIO_VALIDA_EMAIL = "Necessário preencher o E-mail";
     public static final String CADUSUARIO_VALIDA_TELEFONE = "Necessário preencher o Número de Contato";
     public static final String CADUSUARIO_VALIDA_FUNCAO = "Necessário preencher a Função";
-
+    public static final String CADUSUARIO_SALVAR_SUCESSO = "Usuário salvo com sucesso!";
     public static Util getInstance() {
         if (instance != null) return instance;
         return new Util();
@@ -28,4 +31,7 @@ public class Util {
         Toast.makeText(context, mensagem, Toast.LENGTH_LONG).show();
     }
 
+    public void mostraMensagemSnackBar(View view, String mensagem) {
+        Snackbar.make(view, mensagem, Snackbar.LENGTH_LONG).show();
+    }
 }

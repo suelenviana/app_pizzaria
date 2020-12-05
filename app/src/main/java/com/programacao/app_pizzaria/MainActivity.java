@@ -1,8 +1,10 @@
 package com.programacao.app_pizzaria;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import com.programacao.app_pizzaria.banco.ConexaoBancoDados;
 import com.programacao.app_pizzaria.pedido.novoPedidoActivity;
 import com.programacao.app_pizzaria.produto.cadProdutoActivity;
 import com.programacao.app_pizzaria.produto.listProdutoActivity;
@@ -21,11 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     Button btNovoPedido, btCadProduto, btListProduto, btCadUsuario;
     Intent intent;
+    private SQLiteDatabase bancoDados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        criarConexaoBancoDados();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         btNovoPedido = findViewById(R.id.button_novoPedido);
@@ -67,5 +71,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    private void criarConexaoBancoDados() {
+        try {
+            // Abertura da conexão
+            bancoDados = this.openOrCreateDatabase(ConexaoBancoDados.NOME_BANCO_DADOS, MODE_PRIVATE, null);
+            ConexaoBancoDados conexao = new ConexaoBancoDados(bancoDados);
+        } catch(Exception e) {
+            finish();
+        }
     }
 }

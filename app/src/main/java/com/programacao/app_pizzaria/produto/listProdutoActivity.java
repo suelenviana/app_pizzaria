@@ -42,7 +42,5 @@ public class listProdutoActivity extends AppCompatActivity {
             this.adapter.add(produto.getDescricao() + " R$ : " + produto.getPrecoVenda());
         }
         adapter.notifyDataSetChanged();
-
-
     }
 }

@@ -3,8 +3,10 @@ package com.programacao.app_pizzaria;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.programacao.app_pizzaria.pedido.novoPedidoActivity;
+import com.programacao.app_pizzaria.produto.cadProdutoActivity;
+import com.programacao.app_pizzaria.produto.listProdutoActivity;
+import com.programacao.app_pizzaria.usuario.cadUsuarioActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

@@ -10,20 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App_pizzaria" >
         <activity
-            android:name=".listProdutoActivity"
+            android:name=".produto.listProdutoActivity"
             android:label="@string/title_activity_list_produto"
             android:theme="@style/Theme.App_pizzaria.NoActionBar" >
         </activity>
         <activity
-            android:name=".novoPedidoActivity"
+            android:name=".pedido.novoPedidoActivity"
             android:label="@string/title_activity_novo_pedido"
             android:theme="@style/Theme.App_pizzaria.NoActionBar" />
         <activity
-            android:name=".cadUsuarioActivity"
+            android:name=".usuario.cadUsuarioActivity"
             android:label="@string/title_activity_cad_usuario"
             android:theme="@style/Theme.App_pizzaria.NoActionBar" />
         <activity
-            android:name=".cadProdutoActivity"
+            android:name=".produto.cadProdutoActivity"
             android:label="@string/title_activity_cad_produto"
             android:theme="@style/Theme.App_pizzaria.NoActionBar" />
         <activity

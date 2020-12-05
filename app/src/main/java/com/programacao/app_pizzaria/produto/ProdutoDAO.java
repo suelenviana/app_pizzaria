@@ -55,12 +55,11 @@ public class ProdutoDAO implements DAO<Produto> {
         if (cursor != null && cursor.getCount() > 0) {
             int iDescricao = cursor.getColumnIndex("descricao");
             int iPrecoVenda = cursor.getColumnIndex("precoVenda");
-            Produto produto = new Produto();
             while (cursor.moveToNext()) {
+                Produto produto = new Produto();
                 produto.setDescricao(cursor.getString(iDescricao));
                 produto.setPrecoVenda(cursor.getString(iPrecoVenda));
                 listProduto.add(produto);
-
             }
         }
         return listProduto;

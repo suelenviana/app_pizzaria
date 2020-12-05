@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.programacao.app_pizzaria.banco.ConexaoBancoDados;
 import com.programacao.app_pizzaria.pedido.novoPedidoActivity;
+import com.programacao.app_pizzaria.produto.ProdutoDAO;
 import com.programacao.app_pizzaria.produto.cadProdutoActivity;
 import com.programacao.app_pizzaria.produto.listProdutoActivity;
 import com.programacao.app_pizzaria.usuario.cadUsuarioActivity;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btCadProduto = findViewById(R.id.button_cadProduto);
         btListProduto = findViewById(R.id.button_listProduto);
         btCadUsuario = findViewById(R.id.button_cadUsuario);
+        ProdutoDAO.getInstance().criarTabela();
 
 
     }

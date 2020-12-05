@@ -41,6 +41,29 @@ public class cadProdutoActivity extends AppCompatActivity {
         tipoProduto = findViewById(R.id.tipoPedido);
     }
 
+    public void salvar() {
+        produto = new Produto();
+        produto.setDescricao(descricao.getText().toString());
+        produto.setPrecoVenda(precoVenda.getText().toString());
+        produto.setPrecoCusto(precoCusto.getText().toString());
+        idRadioGroupSelecionado = tipoProduto.getCheckedRadioButtonId();
+        radioButton = tipoProduto.findViewById(idRadioGroupSelecionado);
+        produto.setTipoProduto(String.valueOf(tipoProduto.indexOfChild(radioButton)));
+        if (validaProduto(produto)) {
+            System.out.println("Produto salvo");
+            ProdutoDAO.getInstance().adicionar(produto);
+            limpar();
+            //insert aqui.
+        }
+    }
+
+    public void limpar() {
+        descricao.setText("");
+        precoVenda.setText("");
+        precoCusto.setText("");
+        tipoProduto.check(-1);
+    }
+
     public boolean validaProduto(Produto produto) {
         if (produto.getDescricao() == null || produto.getDescricao().isEmpty()) {
             Util.getInstance().mostraMensagem(getBaseContext(), Util.CADPRODUTO_VALIDA_DESCRICAO);
@@ -51,26 +74,11 @@ public class cadProdutoActivity extends AppCompatActivity {
         } else if (produto.getPrecoCusto() == null || produto.getPrecoCusto().isEmpty()) {
             Util.getInstance().mostraMensagem(getBaseContext(), Util.CADPRODUTO_VALIDA_PRECO_CUSTO);
             return false;
-        } else if (produto.getTipoProduto() == null || produto.getTipoProduto().isEmpty()) {
+        } else if (produto.getTipoProduto() == null || produto.getTipoProduto().isEmpty() || produto.getTipoProduto().equals("-1")) {
             Util.getInstance().mostraMensagem(getBaseContext(), Util.CADPRODUTO_VALIDA_TIPO_PRODUTO);
             return false;
         }
         return true;
-    }
-
-
-    public void salvar() {
-        produto = new Produto();
-        produto.setDescricao(descricao.getText().toString());
-        produto.setPrecoVenda(precoVenda.getText().toString());
-        produto.setPrecoCusto(precoVenda.getText().toString());
-        idRadioGroupSelecionado = tipoProduto.getCheckedRadioButtonId();
-        radioButton = tipoProduto.findViewById(idRadioGroupSelecionado);
-        produto.setTipoProduto(String.valueOf(tipoProduto.indexOfChild(radioButton)));
-        if (validaProduto(produto)) {
-            System.out.println("Produto salvo");
-            //insert aqui.
-        }
     }
 
 
@@ -80,6 +88,7 @@ public class cadProdutoActivity extends AppCompatActivity {
             case R.id.btSalvar:
                 salvar();
             case R.id.btLimpar:
+                limpar();
                 break;
             case R.id.btCancelar:
                 intent = new Intent(cadProdutoActivity.this, MainActivity.class);

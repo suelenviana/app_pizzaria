@@ -15,9 +15,7 @@ public class Produto {
         this.precoCusto = precoCusto;
     }
 
-    public Produto() {
-
-    }
+    public Produto() { }
 
     public String getDescricao() {
         return descricao;

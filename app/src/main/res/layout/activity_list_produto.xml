@@ -33,7 +33,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="70dp"
             android:width="250dp"
-            android:text="@string/listProduto_pesquisa"></EditText>
+            android:hint="@string/listProduto_pesquisa"></EditText>
 
         <Button
             android:layout_width="wrap_content"
@@ -50,8 +50,10 @@
         android:orientation="vertical">
 
         <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:id="@+id/listProduto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="150dp">
 
         </ListView>
 

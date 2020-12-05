@@ -5,6 +5,7 @@
     <string name="novoPedido">Novo Pedido</string>
     <string name="cadProduto">Cadastrar Produto</string>
     <string name="listProduto">Produtos</string>
+    <string name="listUsuario">Usuários</string>
     <string name="cadUsuario">Cadastrar Usuário</string>
 
     <string name="next">Next</string>

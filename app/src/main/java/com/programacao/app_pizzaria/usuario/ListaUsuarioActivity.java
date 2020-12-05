@@ -1,17 +1,12 @@
 package com.programacao.app_pizzaria.usuario;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.programacao.app_pizzaria.R;
-import com.programacao.app_pizzaria.produto.Produto;
-import com.programacao.app_pizzaria.produto.ProdutoDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +23,7 @@ public class ListaUsuarioActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         inicializarListView();
+        listarUsuarios();
     }
 
     private void inicializarListView() {

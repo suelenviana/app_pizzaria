@@ -1,10 +1,13 @@
 package com.programacao.app_pizzaria.usuario;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.programacao.app_pizzaria.banco.ConexaoBancoDados;
 import com.programacao.app_pizzaria.banco.DAO;
+import com.programacao.app_pizzaria.produto.Produto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO implements DAO<Usuario> {
@@ -46,7 +49,23 @@ public class UsuarioDAO implements DAO<Usuario> {
 
     @Override
     public List<Usuario> listar() {
-        return null;
+        Cursor cursor = bancoDados.rawQuery(" SELECT nomecompleto, email, telefone, funcao  FROM usuarios", null);
+        List<Usuario> listUsuario = new ArrayList<>();
+        if (cursor != null && cursor.getCount() > 0) {
+            int iNome = cursor.getColumnIndex("nomecompleto");
+            int iEmail = cursor.getColumnIndex("email");
+            int iTelefone = cursor.getColumnIndex("telefone");
+            int iFuncao = cursor.getColumnIndex("funcao");
+            while (cursor.moveToNext()) {
+                Usuario usuario = new Usuario();
+                usuario.setNome(cursor.getString(iNome));
+                usuario.setEmail(cursor.getString(iEmail));
+                usuario.setTelefone(cursor.getString(iTelefone));
+                usuario.setFuncao(cursor.getString(iFuncao));
+                listUsuario.add(usuario);
+            }
+        }
+        return listUsuario;
     }
 
     @Override

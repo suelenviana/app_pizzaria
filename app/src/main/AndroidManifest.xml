@@ -15,6 +15,11 @@
             android:theme="@style/Theme.App_pizzaria.NoActionBar" >
         </activity>
         <activity
+            android:name=".usuario.ListaUsuarioActivity"
+            android:label="@string/listUsuario"
+            android:theme="@style/Theme.App_pizzaria.NoActionBar" >
+        </activity>
+        <activity
             android:name=".pedido.novoPedidoActivity"
             android:label="@string/title_activity_novo_pedido"
             android:theme="@style/Theme.App_pizzaria.NoActionBar" />

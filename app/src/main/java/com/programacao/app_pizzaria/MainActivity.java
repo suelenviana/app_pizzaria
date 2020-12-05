@@ -9,6 +9,7 @@ import com.programacao.app_pizzaria.pedido.novoPedidoActivity;
 import com.programacao.app_pizzaria.produto.ProdutoDAO;
 import com.programacao.app_pizzaria.produto.cadProdutoActivity;
 import com.programacao.app_pizzaria.produto.listProdutoActivity;
+import com.programacao.app_pizzaria.usuario.ListaUsuarioActivity;
 import com.programacao.app_pizzaria.usuario.UsuarioDAO;
 import com.programacao.app_pizzaria.usuario.cadUsuarioActivity;
 
@@ -23,7 +24,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btNovoPedido, btCadProduto, btListProduto, btCadUsuario;
+    Button btNovoPedido, btCadProduto, btListProduto, btCadUsuario, btListUsuario;
     Intent intent;
     private SQLiteDatabase bancoDados;
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btCadProduto = findViewById(R.id.button_cadProduto);
         btListProduto = findViewById(R.id.button_listProduto);
         btCadUsuario = findViewById(R.id.button_cadUsuario);
+        btListUsuario = findViewById(R.id.button_listUsuario);
         ProdutoDAO.getInstance().criarTabela();
         UsuarioDAO.getInstance().criarTabela();
 
@@ -56,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.button_listProduto:
                 intent = new Intent(MainActivity.this, listProdutoActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.button_listUsuario:
+                intent = new Intent(MainActivity.this, ListaUsuarioActivity.class);
                 startActivity(intent);
                 break;
             case R.id.button_cadUsuario:

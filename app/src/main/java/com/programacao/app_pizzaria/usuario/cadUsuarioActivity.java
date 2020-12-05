@@ -11,10 +11,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class cadUsuarioActivity extends AppCompatActivity {
 
     Button btSalvar, btLimpar, btCancelar;
+    EditText nomeCompletoE;
+    EditText emailE;
+    EditText telefoneE;
     Intent intent;
 
     @Override
@@ -26,6 +30,9 @@ public class cadUsuarioActivity extends AppCompatActivity {
         btSalvar = findViewById(R.id.btSalvar);
         btLimpar = findViewById(R.id.btLimpar);
         btCancelar = findViewById(R.id.btCancelar);
+        nomeCompletoE = findViewById(R.id.nome_ompleto);
+        emailE = findViewById(R.id.email);
+        telefoneE = findViewById(R.id.telefone);
 
     }
 
@@ -33,6 +40,7 @@ public class cadUsuarioActivity extends AppCompatActivity {
         final int id = v.getId();
         switch (id) {
             case R.id.btSalvar:
+
                 break;
             case R.id.btLimpar:
                 break;
@@ -41,5 +49,9 @@ public class cadUsuarioActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
         }
+    }
+
+    public void salvar() {
+
     }
 }

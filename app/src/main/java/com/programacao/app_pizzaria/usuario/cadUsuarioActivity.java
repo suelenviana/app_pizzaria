@@ -1,10 +1,10 @@
-package com.programacao.app_pizzaria;
+package com.programacao.app_pizzaria.usuario;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.programacao.app_pizzaria.MainActivity;
+import com.programacao.app_pizzaria.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,7 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-public class novoPedidoActivity extends AppCompatActivity {
+public class cadUsuarioActivity extends AppCompatActivity {
 
     Button btSalvar, btLimpar, btCancelar;
     Intent intent;
@@ -20,12 +20,13 @@ public class novoPedidoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_novo_pedido);
+        setContentView(R.layout.activity_cad_usuario);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         btSalvar = findViewById(R.id.btSalvar);
         btLimpar = findViewById(R.id.btLimpar);
         btCancelar = findViewById(R.id.btCancelar);
+
     }
 
     public void onClick(View v) {
@@ -36,7 +37,7 @@ public class novoPedidoActivity extends AppCompatActivity {
             case R.id.btLimpar:
                 break;
             case R.id.btCancelar:
-                intent = new Intent(novoPedidoActivity.this, MainActivity.class);
+                intent = new Intent(cadUsuarioActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
         }

@@ -3,11 +3,13 @@ package com.programacao.app_pizzaria.banco;
 import java.util.List;
 
 public interface DAO<T> {
+
+
     void criarTabela();
 
     void adicionar(T t);
 
-    List<Object> listar();
+    List<T> listar();
 
     void atualizar(T t);
 

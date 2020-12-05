@@ -45,7 +45,7 @@ public class UsuarioDAO implements DAO<Usuario> {
     }
 
     @Override
-    public List<Object> listar() {
+    public List<Usuario> listar() {
         return null;
     }
 

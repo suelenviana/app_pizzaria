@@ -1,6 +1,8 @@
 package com.programacao.app_pizzaria.usuario;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.programacao.app_pizzaria.R;
+import com.programacao.app_pizzaria.Util.Util;
 
 import java.util.ArrayList;
 
@@ -39,6 +42,28 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
         ImageButton excluir = view.findViewById(R.id.excluir);
         ImageButton editar = view.findViewById(R.id.editar);
 
+        excluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Confirmação")
+                        .setMessage("Deseja excluir o contato?")
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // Exclui do banco de dados
+                                UsuarioDAO.getInstance().excluir(usuario);
+
+                                // Lista os contatos atualizados
+                                ListaUsuarioActivity activity = (ListaUsuarioActivity) getContext();
+                                activity.listarUsuarios();
+                                Util.getInstance().mostraMensagem(activity.getBaseContext(), "Excluído");
+                            }
+                        })
+                        .setNegativeButton("Não", null)
+                        .show();
+            }
+        });
         nome.setText(usuario.getNome());
         email.setText(usuario.getEmail());
         telefone.setText(usuario.getTelefone());

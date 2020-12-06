@@ -36,7 +36,7 @@ public class ListaUsuarioActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private void listarUsuarios() {
+    public void listarUsuarios() {
         // Limpar a lista
         adapter.clear();
 

@@ -67,6 +67,8 @@ public class cadUsuarioActivity extends AppCompatActivity {
         String email = emailE.getText().toString();
         String telefone = telefoneE.getText().toString();
 
+        int idRadioGroupSelecionado = funcaoGroup.getCheckedRadioButtonId();
+        radioButton = funcaoGroup.findViewById(idRadioGroupSelecionado);
         String funcao = radioButton.getText().toString();
 
         usuario = new Usuario();

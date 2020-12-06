@@ -8,6 +8,24 @@ public class Usuario {
     private String telefone;
     private String funcao;
 
+    public Usuario(){
+    }
+
+    public Usuario(String nome, String email, String telefone, String funcao) {
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.funcao = funcao;
+    }
+
+    public Usuario(int id, String nome, String email, String telefone, String funcao) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.funcao = funcao;
+    }
+
     public int getId() {
         return id;
     }

@@ -72,7 +72,19 @@ public class UsuarioDAO implements DAO<Usuario> {
 
     @Override
     public void atualizar(Usuario usuario) {
+        StringBuilder sql = new StringBuilder("UPDATE usuarios ")
+                .append(" SET nomecompleto = '")
+                .append(usuario.getNome())
+                .append("', email = '")
+                .append(usuario.getEmail())
+                .append("', telefone = '")
+                .append(usuario.getTelefone())
+                .append("', funcao = '")
+                .append(usuario.getFuncao())
+                .append("' WHERE id = ")
+                .append(usuario.getId());
 
+        bancoDados.execSQL(sql.toString());
     }
 
     @Override

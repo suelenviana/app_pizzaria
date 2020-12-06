@@ -1,17 +1,20 @@
 package com.programacao.app_pizzaria.usuario;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.programacao.app_pizzaria.MainActivity;
 import com.programacao.app_pizzaria.R;
+import com.programacao.app_pizzaria.Util.DataTransferInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaUsuarioActivity extends AppCompatActivity {
+public class ListaUsuarioActivity extends AppCompatActivity implements DataTransferInterface {
     UsuarioAdapter adapter;
     List<Usuario> usuarioList;
     Usuario usuario;
@@ -48,5 +51,18 @@ public class ListaUsuarioActivity extends AppCompatActivity {
 
         // Notificar as mudanças de dados para o ListView
         this.adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onEditarUsuario(Usuario usuario) {
+        Intent intent = new Intent(ListaUsuarioActivity.this, cadUsuarioActivity.class);
+        intent.putExtra("id", usuario.getId());
+        intent.putExtra("nome", usuario.getNome());
+        intent.putExtra("email", usuario.getEmail());
+        intent.putExtra("telefone", usuario.getTelefone());
+        intent.putExtra("funcao", usuario.getFuncao());
+        intent.putExtra("emEdicao", true);
+
+        startActivity(intent);
     }
 }

@@ -1,5 +1,6 @@
 package com.programacao.app_pizzaria.usuario;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -27,6 +28,7 @@ public class cadUsuarioActivity extends AppCompatActivity {
     RadioButton radioButton;
     Intent intent;
     Usuario usuario;
+    boolean emEdicao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,19 @@ public class cadUsuarioActivity extends AppCompatActivity {
         int idRadioGroupSelecionado = funcaoGroup.getChildAt(0).getId();
         radioButton = funcaoGroup.findViewById(idRadioGroupSelecionado);
         radioButton.setSelected(true);
+
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", 0);
+        String nome = intent.getStringExtra("nome");
+        String email = intent.getStringExtra("email");
+        String telefone = intent.getStringExtra("telefone");
+        String funcao = intent.getStringExtra("funcao");
+        emEdicao = intent.getBooleanExtra("emEdicao", false);
+
+        if (emEdicao) {
+            usuario = new Usuario(id, nome, email, telefone, funcao);
+            preencherCamposEmEdicao(usuario);
+        }
     }
 
     public void onClick(View v) {
@@ -56,8 +71,7 @@ public class cadUsuarioActivity extends AppCompatActivity {
                 limpar();
                 break;
             case R.id.btCancelar:
-                intent = new Intent(cadUsuarioActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
                 break;
         }
     }
@@ -71,18 +85,29 @@ public class cadUsuarioActivity extends AppCompatActivity {
         radioButton = funcaoGroup.findViewById(idRadioGroupSelecionado);
         String funcao = radioButton.getText().toString();
 
-        usuario = new Usuario();
-        usuario.setNome(nomeCompleto);
-        usuario.setEmail(email);
-        usuario.setTelefone(telefone);
-        usuario.setFuncao(funcao);
-        if(validaUsuario(usuario)) {
-            //insert
-            UsuarioDAO.getInstance().adicionar(usuario);
+        if(emEdicao) {
+            usuario.setNome(nomeCompleto);
+            usuario.setEmail(email);
+            usuario.setTelefone(telefone);
+            usuario.setFuncao(funcao);
+            UsuarioDAO.getInstance().atualizar(usuario);
             limpar();
-            Util.getInstance().mostraMensagemSnackBar(findViewById(R.id.activity_cad_usuario), Util.CADUSUARIO_SALVAR_SUCESSO);
+            Util.getInstance().mostraMensagem(getBaseContext(), Util.CADUSUARIO_ATUALIZAR_SUCESSO);
+            intent = new Intent(cadUsuarioActivity.this, ListaUsuarioActivity.class);
+            startActivity(intent);
+        } else {
+            usuario = new Usuario();
+            usuario.setNome(nomeCompleto);
+            usuario.setEmail(email);
+            usuario.setTelefone(telefone);
+            usuario.setFuncao(funcao);
+           if(validaUsuario(usuario)) {
+               //insert
+               UsuarioDAO.getInstance().adicionar(usuario);
+               limpar();
+               Util.getInstance().mostraMensagemSnackBar(findViewById(R.id.activity_cad_usuario), Util.CADUSUARIO_SALVAR_SUCESSO);
+           }
         }
-
     }
 
     public boolean validaUsuario(Usuario usuario) {
@@ -107,5 +132,20 @@ public class cadUsuarioActivity extends AppCompatActivity {
         emailE.setText("");
         telefoneE.setText("");
         funcaoGroup.check(-1);
+    }
+
+    @SuppressLint("ResourceType")
+    public void preencherCamposEmEdicao(Usuario usuario) {
+        nomeCompletoE.setText(usuario.getNome());
+        emailE.setText(usuario.getEmail());
+        telefoneE.setText(usuario.getTelefone());
+        if (usuario.getFuncao().equals(Util.USUARIO_FUNCAO_GERENTE)) {
+            funcaoGroup.check(0);
+            radioButton.setSelected(true);
+        }
+        else if (usuario.getFuncao().equals(Util.USUARIO_FUNCAO_GARCOM)) {
+            funcaoGroup.check(1);
+            radioButton.setSelected(true);
+        }
     }
 }

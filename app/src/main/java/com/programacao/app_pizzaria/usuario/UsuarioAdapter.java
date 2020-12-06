@@ -14,14 +14,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.programacao.app_pizzaria.R;
+import com.programacao.app_pizzaria.Util.DataTransferInterface;
 import com.programacao.app_pizzaria.Util.Util;
 
 import java.util.ArrayList;
 
 public class UsuarioAdapter extends ArrayAdapter<Usuario> {
 
+    DataTransferInterface dtInterface;
+
     public UsuarioAdapter(@NonNull Context context) {
         super(context, R.layout.usuario, new ArrayList<>());
+        this.dtInterface = (DataTransferInterface) context;
     }
 
     @NonNull
@@ -62,6 +66,13 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
                         })
                         .setNegativeButton("Não", null)
                         .show();
+            }
+        });
+
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dtInterface.onEditarUsuario(usuario);
             }
         });
         nome.setText(usuario.getNome());

@@ -45,7 +45,7 @@ public class cadUsuarioActivity extends AppCompatActivity {
         funcaoGroup = findViewById(R.id.funcao);
         int idRadioGroupSelecionado = funcaoGroup.getChildAt(0).getId();
         radioButton = funcaoGroup.findViewById(idRadioGroupSelecionado);
-        radioButton.setSelected(true);
+        radioButton.setChecked(true);
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", 0);
@@ -140,12 +140,12 @@ public class cadUsuarioActivity extends AppCompatActivity {
         emailE.setText(usuario.getEmail());
         telefoneE.setText(usuario.getTelefone());
         if (usuario.getFuncao().equals(Util.USUARIO_FUNCAO_GERENTE)) {
-            funcaoGroup.check(0);
-            radioButton.setSelected(true);
+            radioButton = findViewById(funcaoGroup.getChildAt(0).getId());
+            radioButton.setChecked(true);
         }
         else if (usuario.getFuncao().equals(Util.USUARIO_FUNCAO_GARCOM)) {
-            funcaoGroup.check(1);
-            radioButton.setSelected(true);
+            radioButton = findViewById(funcaoGroup.getChildAt(1).getId());
+            radioButton.setChecked(true);
         }
     }
 }

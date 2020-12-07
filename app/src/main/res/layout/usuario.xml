@@ -15,7 +15,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome: "></TextView>
+                android:text="@string/listUsuario_nome"></TextView>
 
             <TextView
                 android:id="@+id/nome"
@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="E-mail: "></TextView>
+                android:text="@string/listUsuario_email"></TextView>
             <TextView
                 android:id="@+id/email"
                 android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Telefone: "></TextView>
+                android:text="@string/listUsuario_telefone"></TextView>
             <TextView
                 android:id="@+id/telefone"
                 android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Função: "></TextView>
+                android:text="@string/listUsuario_funcao"></TextView>
             <TextView
                 android:id="@+id/funcao"
                 android:layout_width="match_parent"

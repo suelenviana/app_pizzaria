@@ -35,11 +35,14 @@
     <string name="cadUsuario_funcaoGerente">Gerente</string>
     <string name="cadUsuario_funcaoGarcom">Garçom</string>
 
-    <string name="listProduto_pesquisa">Digite o nome do produto</string>
-    <string name="listProduto_buscar">Buscar</string>
     <string name="listProduto_descricao">Descrição: </string>
     <string name="listProduto_preco_venda">Preço de Venda: </string>
     <string name="listProduto_preco_custo">Preço de Custo: </string>
+
+    <string name="listUsuario_nome">Nome: </string>
+    <string name="listUsuario_email">Email: </string>
+    <string name="listUsuario_telefone">Telefone: </string>
+    <string name="listUsuario_funcao">Função: </string>
 
     <string name="novoPedido_usuario">Selecione o Usuário</string>
     <string name="novoPedido_produto">Selecione o Item</string>

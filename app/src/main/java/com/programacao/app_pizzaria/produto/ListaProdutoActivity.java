@@ -5,7 +5,9 @@ import android.os.Bundle;
 
 import com.programacao.app_pizzaria.R;
 import com.programacao.app_pizzaria.Util.DataTransferInterface;
+import com.programacao.app_pizzaria.Util.Util;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -14,11 +16,10 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaProdutoActivity extends AppCompatActivity implements DataTransferInterface {
+public class ListaProdutoActivity extends AppCompatActivity implements DataTransferInterface<Produto> {
 
     ProdutoAdapter adapter;
     private List<Produto> produtoList;
-    private Produto produto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +42,7 @@ public class ListaProdutoActivity extends AppCompatActivity implements DataTrans
     }
 
     @Override
-    public void onEditar(Object object) {
-        Produto produto = (Produto) object;
+    public void onEditar(Produto produto) {
         Intent intent = new Intent(ListaProdutoActivity.this, cadProdutoActivity.class);
         intent.putExtra("id", produto.getId());
         intent.putExtra("descricao", produto.getDescricao());
@@ -51,7 +51,7 @@ public class ListaProdutoActivity extends AppCompatActivity implements DataTrans
         intent.putExtra("tipoProduto", produto.getTipoProduto());
         intent.putExtra("emEdicao", true);
 
-        startActivity(intent);
+        startActivityForResult(intent, Util.REQUEST_CODE_EDITAR);
     }
     public void listarProdutos() {
         // Limpar a lista
@@ -65,5 +65,15 @@ public class ListaProdutoActivity extends AppCompatActivity implements DataTrans
 
         // Notificar as mudanças de dados para o ListView
         this.adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Util.REQUEST_CODE_EDITAR) {
+            if (resultCode == RESULT_OK) {
+                listarProdutos();
+            }
+        }
     }
 }

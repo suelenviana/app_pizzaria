@@ -93,8 +93,9 @@ public class cadUsuarioActivity extends AppCompatActivity {
             UsuarioDAO.getInstance().atualizar(usuario);
             limpar();
             Util.getInstance().mostraMensagem(getBaseContext(), Util.CADUSUARIO_ATUALIZAR_SUCESSO);
-            intent = new Intent(cadUsuarioActivity.this, ListaUsuarioActivity.class);
-            startActivity(intent);
+            intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
         } else {
             usuario = new Usuario();
             usuario.setNome(nomeCompleto);

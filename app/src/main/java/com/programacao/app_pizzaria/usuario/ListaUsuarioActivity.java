@@ -4,20 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.programacao.app_pizzaria.MainActivity;
 import com.programacao.app_pizzaria.R;
 import com.programacao.app_pizzaria.Util.DataTransferInterface;
+import com.programacao.app_pizzaria.Util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaUsuarioActivity extends AppCompatActivity implements DataTransferInterface {
+public class ListaUsuarioActivity extends AppCompatActivity implements DataTransferInterface<Usuario> {
     UsuarioAdapter adapter;
     List<Usuario> usuarioList;
-    Usuario usuario;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,8 +55,7 @@ public class ListaUsuarioActivity extends AppCompatActivity implements DataTrans
     }
 
     @Override
-    public void onEditar(Object object) {
-        Usuario usuario = (Usuario) object;
+    public void onEditar(Usuario usuario) {
         Intent intent = new Intent(ListaUsuarioActivity.this, cadUsuarioActivity.class);
         intent.putExtra("id", usuario.getId());
         intent.putExtra("nome", usuario.getNome());
@@ -64,6 +64,16 @@ public class ListaUsuarioActivity extends AppCompatActivity implements DataTrans
         intent.putExtra("funcao", usuario.getFuncao());
         intent.putExtra("emEdicao", true);
 
-        startActivity(intent);
+        startActivityForResult(intent, Util.REQUEST_CODE_EDITAR);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Util.REQUEST_CODE_EDITAR) {
+            if (resultCode == RESULT_OK) {
+                listarUsuarios();
+            }
+        }
     }
 }

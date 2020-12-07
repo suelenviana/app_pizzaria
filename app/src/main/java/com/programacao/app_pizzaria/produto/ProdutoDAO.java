@@ -27,7 +27,7 @@ public class ProdutoDAO implements DAO<Produto> {
                 .append("   descricao VARCHAR(250) NOT NULL,")
                 .append("   precoVenda NUMBER(50) NOT NULL,")
                 .append("   precoCusto NUMBER(50) NOT NULL,")
-                .append("   tipoProduto CHAR(1) NOT NULL")
+                .append("   tipoProduto NUMBER(1) NOT NULL")
                 .append(")")
                 .toString();
         bancoDados.execSQL(sql);
@@ -50,19 +50,21 @@ public class ProdutoDAO implements DAO<Produto> {
 
     @Override
     public List<Produto> listar() {
-        Cursor cursor = bancoDados.rawQuery(" SELECT id, descricao, precoVenda, precoCusto  FROM produtos", null);
+        Cursor cursor = bancoDados.rawQuery(" SELECT id, descricao, precoVenda, precoCusto, tipoProduto  FROM produtos", null);
         List<Produto> listProduto = new ArrayList<>();
         if (cursor != null && cursor.getCount() > 0) {
             int iId = cursor.getColumnIndex("id");
             int iDescricao = cursor.getColumnIndex("descricao");
             int iPrecoVenda = cursor.getColumnIndex("precoVenda");
             int iPrecoCusto = cursor.getColumnIndex("precoCusto");
+            int iTipoProduto = cursor.getColumnIndex("tipoProduto");
             while (cursor.moveToNext()) {
                 Produto produto = new Produto();
                 produto.setId(cursor.getInt(iId));
                 produto.setDescricao(cursor.getString(iDescricao));
                 produto.setPrecoVenda(cursor.getString(iPrecoVenda));
                 produto.setPrecoCusto(cursor.getString(iPrecoCusto));
+                produto.setTipoProduto(cursor.getString(iTipoProduto));
                 listProduto.add(produto);
             }
         }

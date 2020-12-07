@@ -24,10 +24,10 @@ public class cadProdutoActivity extends AppCompatActivity {
     private Intent intent;
     boolean emEdicao;
     private Produto produto;
-    private EditText descricao;
-    private EditText precoVenda;
-    private EditText precoCusto;
-    private RadioGroup tipoProduto;
+    private EditText descricaoE;
+    private EditText precoVendaE;
+    private EditText precoCustoE;
+    private RadioGroup tipoProdutoR;
     private int idRadioGroupSelecionado;
     RadioButton radioButton;
 
@@ -40,13 +40,13 @@ public class cadProdutoActivity extends AppCompatActivity {
         btSalvar = findViewById(R.id.btSalvar);
         btLimpar = findViewById(R.id.btLimpar);
         btCancelar = findViewById(R.id.btCancelar);
-        descricao = findViewById(R.id.descricao);
-        precoVenda = findViewById(R.id.precoVenda);
-        precoCusto = findViewById(R.id.precoCusto);
-        tipoProduto = findViewById(R.id.tipoPedido);
+        descricaoE = findViewById(R.id.descricao);
+        precoVendaE = findViewById(R.id.precoVenda);
+        precoCustoE = findViewById(R.id.precoCusto);
+        tipoProdutoR = findViewById(R.id.tipoPedido);
 
-        int idRadioGroupSelecionado = tipoProduto.getChildAt(0).getId();
-        radioButton = tipoProduto.findViewById(idRadioGroupSelecionado);
+        int idRadioGroupSelecionado = tipoProdutoR.getChildAt(0).getId();
+        radioButton = tipoProdutoR.findViewById(idRadioGroupSelecionado);
         radioButton.setChecked(true);
 
         Intent intent = getIntent();
@@ -65,42 +65,62 @@ public class cadProdutoActivity extends AppCompatActivity {
     }
 
     public void salvar() {
-        produto = new Produto();
-        produto.setDescricao(descricao.getText().toString());
-        produto.setPrecoVenda(precoVenda.getText().toString());
-        produto.setPrecoCusto(precoCusto.getText().toString());
-        idRadioGroupSelecionado = tipoProduto.getCheckedRadioButtonId();
-        radioButton = tipoProduto.findViewById(idRadioGroupSelecionado);
-        produto.setTipoProduto(String.valueOf(tipoProduto.indexOfChild(radioButton)));
-        if (validaProduto(produto)) {
+        String descricao = descricaoE.getText().toString();
+        String precoVenda = precoVendaE.getText().toString();
+        String precoCusto = precoCustoE.getText().toString();
+        idRadioGroupSelecionado = tipoProdutoR.getCheckedRadioButtonId();
+        radioButton = tipoProdutoR.findViewById(idRadioGroupSelecionado);
+        String tipoProduto = String.valueOf(tipoProdutoR.indexOfChild(radioButton));
+
+        if (emEdicao) {
+            produto.setDescricao(descricao);
+            produto.setPrecoVenda(precoVenda);
+            produto.setPrecoCusto(precoCusto);
+            produto.setTipoProduto(tipoProduto);
             System.out.println("Produto salvo");
-            ProdutoDAO.getInstance().adicionar(produto);
+            ProdutoDAO.getInstance().atualizar(produto);
             limpar();
-            //insert aqui.
+            Util.getInstance().mostraMensagem(getBaseContext(), Util.CADPRODUTO_SALVAR_SUCESSO);
+            intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        } else {
+            produto = new Produto();
+            produto.setDescricao(descricao);
+            produto.setPrecoVenda(precoVenda);
+            produto.setPrecoCusto(precoCusto);
+            produto.setTipoProduto(tipoProduto);
+            if (validaProduto(produto)) {
+                System.out.println("Produto salvo");
+                ProdutoDAO.getInstance().adicionar(produto);
+                limpar();
+                Util.getInstance().mostraMensagemSnackBar(findViewById(R.id.activity_cad_usuario), Util.CADPRODUTO_ATUALIZAR_SUCESSO);
+                //insert aqui.
+            }
         }
     }
 
     public void limpar() {
-        descricao.setText("");
-        precoVenda.setText("");
-        precoCusto.setText("");
-        tipoProduto.check(-1);
+        descricaoE.setText("");
+        precoVendaE.setText("");
+        precoCustoE.setText("");
+        tipoProdutoR.check(-1);
     }
 
     @SuppressLint("ResourceType")
     public void preencherCamposEmEdicao(Produto produto) {
-        descricao.setText(produto.getDescricao());
-        precoVenda.setText(produto.getPrecoVenda());
-        precoCusto.setText(produto.getPrecoCusto());
+        descricaoE.setText(produto.getDescricao());
+        precoVendaE.setText(produto.getPrecoVenda());
+        precoCustoE.setText(produto.getPrecoCusto());
         if (produto.getTipoProduto().equals(Util.PRODUTO_TIPO_ALIMENTO)) {
-            radioButton = findViewById(tipoProduto.getChildAt(0).getId());
+            radioButton = findViewById(tipoProdutoR.getChildAt(0).getId());
             radioButton.setChecked(true);
         }
         else if (produto.getTipoProduto().equals(Util.PRODUTO_TIPO_BEBIDA)) {
-            radioButton = findViewById(tipoProduto.getChildAt(1).getId());
+            radioButton = findViewById(tipoProdutoR.getChildAt(1).getId());
             radioButton.setChecked(true);
         } else {
-            radioButton = findViewById(tipoProduto.getChildAt(2).getId());
+            radioButton = findViewById(tipoProdutoR.getChildAt(2).getId());
             radioButton.setChecked(true);
         }
     }
@@ -132,8 +152,7 @@ public class cadProdutoActivity extends AppCompatActivity {
                 limpar();
                 break;
             case R.id.btCancelar:
-                intent = new Intent(cadProdutoActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
                 break;
         }
     }

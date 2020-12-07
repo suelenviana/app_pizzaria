@@ -1,4 +1,4 @@
-package com.programacao.app_pizzaria.usuario;
+package com.programacao.app_pizzaria.produto;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,14 +17,15 @@ import com.programacao.app_pizzaria.R;
 import com.programacao.app_pizzaria.Util.DataTransferInterface;
 import com.programacao.app_pizzaria.Util.Util;
 
+
 import java.util.ArrayList;
 
-public class UsuarioAdapter extends ArrayAdapter<Usuario> {
+public class ProdutoAdapter extends ArrayAdapter<Produto> {
 
     DataTransferInterface dtInterface;
 
-    public UsuarioAdapter(@NonNull Context context) {
-        super(context, R.layout.usuario, new ArrayList<>());
+    public ProdutoAdapter(@NonNull Context context) {
+        super(context, R.layout.produto, new ArrayList<>());
         this.dtInterface = (DataTransferInterface) context;
     }
 
@@ -34,14 +35,13 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
 
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
-        View view = layoutInflater.inflate(R.layout.usuario, parent, false);
+        View view = layoutInflater.inflate(R.layout.produto, parent, false);
 
-        Usuario usuario = getItem(position);
+        Produto produto = getItem(position);
 
-        TextView nome = view.findViewById(R.id.nome);
-        TextView email = view.findViewById(R.id.email);
-        TextView telefone = view.findViewById(R.id.telefone);
-        TextView funcao = view.findViewById(R.id.funcao);
+        TextView descricao = view.findViewById(R.id.descricao);
+        TextView precoVenda = view.findViewById(R.id.precoVenda);
+        TextView precoCusto = view.findViewById(R.id.precoCusto);
 
         ImageButton excluir = view.findViewById(R.id.excluir);
         ImageButton editar = view.findViewById(R.id.editar);
@@ -51,13 +51,13 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
             public void onClick(View view) {
                 new AlertDialog.Builder(getContext())
                         .setTitle(Util.MSG_TITULO)
-                        .setMessage(Util.MSG_EXCLUIR_USUARIO)
+                        .setMessage(Util.MSG_EXCLUIR_PRODUTO)
                         .setPositiveButton(Util.MSG_SIM, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                UsuarioDAO.getInstance().excluir(usuario);
-                                ListaUsuarioActivity activity = (ListaUsuarioActivity) getContext();
-                                activity.listarUsuarios();
+                                ProdutoDAO.getInstance().excluir(produto);
+                                ListaProdutoActivity activity = (ListaProdutoActivity) getContext();
+                                activity.listarProdutos();
                                 Util.getInstance().mostraMensagem(activity.getBaseContext(), Util.MSG_EXCLUIDO);
                             }
                         })
@@ -69,14 +69,14 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dtInterface.onEditar(usuario);
+                dtInterface.onEditar(produto);
             }
         });
-        nome.setText(usuario.getNome());
-        email.setText(usuario.getEmail());
-        telefone.setText(usuario.getTelefone());
-        funcao.setText(usuario.getFuncao());
-        
+        descricao.setText(produto.getDescricao());
+        precoVenda.setText(produto.getPrecoVenda());
+        precoCusto.setText(produto.getPrecoCusto());
+
         return view;
     }
+
 }

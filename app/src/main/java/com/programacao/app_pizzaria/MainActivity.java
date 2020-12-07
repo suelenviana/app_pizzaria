@@ -8,7 +8,7 @@ import com.programacao.app_pizzaria.banco.ConexaoBancoDados;
 import com.programacao.app_pizzaria.pedido.novoPedidoActivity;
 import com.programacao.app_pizzaria.produto.ProdutoDAO;
 import com.programacao.app_pizzaria.produto.cadProdutoActivity;
-import com.programacao.app_pizzaria.produto.listProdutoActivity;
+import com.programacao.app_pizzaria.produto.ListaProdutoActivity;
 import com.programacao.app_pizzaria.usuario.ListaUsuarioActivity;
 import com.programacao.app_pizzaria.usuario.UsuarioDAO;
 import com.programacao.app_pizzaria.usuario.cadUsuarioActivity;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.button_listProduto:
-                intent = new Intent(MainActivity.this, listProdutoActivity.class);
+                intent = new Intent(MainActivity.this, ListaProdutoActivity.class);
                 startActivity(intent);
                 break;
             case R.id.button_listUsuario:

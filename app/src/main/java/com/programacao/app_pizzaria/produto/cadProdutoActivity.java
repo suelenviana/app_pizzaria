@@ -1,10 +1,12 @@
 package com.programacao.app_pizzaria.produto;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,19 +15,21 @@ import androidx.appcompat.widget.Toolbar;
 import com.programacao.app_pizzaria.MainActivity;
 import com.programacao.app_pizzaria.R;
 import com.programacao.app_pizzaria.Util.Util;
+import com.programacao.app_pizzaria.usuario.Usuario;
 import com.programacao.app_pizzaria.usuario.UsuarioDAO;
 
 public class cadProdutoActivity extends AppCompatActivity {
 
     private Button btSalvar, btLimpar, btCancelar;
     private Intent intent;
+    boolean emEdicao;
     private Produto produto;
     private EditText descricao;
     private EditText precoVenda;
     private EditText precoCusto;
     private RadioGroup tipoProduto;
     private int idRadioGroupSelecionado;
-    View radioButton;
+    RadioButton radioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,24 @@ public class cadProdutoActivity extends AppCompatActivity {
         precoVenda = findViewById(R.id.precoVenda);
         precoCusto = findViewById(R.id.precoCusto);
         tipoProduto = findViewById(R.id.tipoPedido);
+
+        int idRadioGroupSelecionado = tipoProduto.getChildAt(0).getId();
+        radioButton = tipoProduto.findViewById(idRadioGroupSelecionado);
+        radioButton.setChecked(true);
+
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", 0);
+        String descricao = intent.getStringExtra("descricao");
+        String precoVenda = intent.getStringExtra("precoVenda");
+        String precoCusto = intent.getStringExtra("precoCusto");
+        String tipoProduto = intent.getStringExtra("tipoProduto");
+        emEdicao = intent.getBooleanExtra("emEdicao", false);
+
+        if (emEdicao) {
+            produto = new Produto(id, descricao, precoVenda, precoCusto, tipoProduto);
+            preencherCamposEmEdicao(produto);
+        }
+
     }
 
     public void salvar() {
@@ -63,6 +85,24 @@ public class cadProdutoActivity extends AppCompatActivity {
         precoVenda.setText("");
         precoCusto.setText("");
         tipoProduto.check(-1);
+    }
+
+    @SuppressLint("ResourceType")
+    public void preencherCamposEmEdicao(Produto produto) {
+        descricao.setText(produto.getDescricao());
+        precoVenda.setText(produto.getPrecoVenda());
+        precoCusto.setText(produto.getPrecoCusto());
+        if (produto.getTipoProduto().equals(Util.PRODUTO_TIPO_ALIMENTO)) {
+            radioButton = findViewById(tipoProduto.getChildAt(0).getId());
+            radioButton.setChecked(true);
+        }
+        else if (produto.getTipoProduto().equals(Util.PRODUTO_TIPO_BEBIDA)) {
+            radioButton = findViewById(tipoProduto.getChildAt(1).getId());
+            radioButton.setChecked(true);
+        } else {
+            radioButton = findViewById(tipoProduto.getChildAt(2).getId());
+            radioButton.setChecked(true);
+        }
     }
 
     public boolean validaProduto(Produto produto) {

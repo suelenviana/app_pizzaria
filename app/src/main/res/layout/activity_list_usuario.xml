@@ -21,26 +21,8 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+<!--    <include layout="@layout/content_list_produto" />-->
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:width="250dp"
-            android:hint="@string/listProduto_pesquisa"></EditText>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="3dp"
-            android:text="@string/listProduto_buscar"></Button>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -54,7 +54,8 @@ public class ListaUsuarioActivity extends AppCompatActivity implements DataTrans
     }
 
     @Override
-    public void onEditarUsuario(Usuario usuario) {
+    public void onEditar(Object object) {
+        Usuario usuario = (Usuario) object;
         Intent intent = new Intent(ListaUsuarioActivity.this, cadUsuarioActivity.class);
         intent.putExtra("id", usuario.getId());
         intent.putExtra("nome", usuario.getNome());

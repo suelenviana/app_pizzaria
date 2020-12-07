@@ -50,15 +50,19 @@ public class ProdutoDAO implements DAO<Produto> {
 
     @Override
     public List<Produto> listar() {
-        Cursor cursor = bancoDados.rawQuery(" SELECT descricao, precoVenda  FROM produtos", null);
+        Cursor cursor = bancoDados.rawQuery(" SELECT id, descricao, precoVenda, precoCusto  FROM produtos", null);
         List<Produto> listProduto = new ArrayList<>();
         if (cursor != null && cursor.getCount() > 0) {
+            int iId = cursor.getColumnIndex("id");
             int iDescricao = cursor.getColumnIndex("descricao");
             int iPrecoVenda = cursor.getColumnIndex("precoVenda");
+            int iPrecoCusto = cursor.getColumnIndex("precoCusto");
             while (cursor.moveToNext()) {
                 Produto produto = new Produto();
+                produto.setId(cursor.getInt(iId));
                 produto.setDescricao(cursor.getString(iDescricao));
                 produto.setPrecoVenda(cursor.getString(iPrecoVenda));
+                produto.setPrecoCusto(cursor.getString(iPrecoCusto));
                 listProduto.add(produto);
             }
         }
@@ -67,11 +71,29 @@ public class ProdutoDAO implements DAO<Produto> {
 
     @Override
     public void atualizar(Produto produto) {
+        StringBuilder sql = new StringBuilder("UPDATE produtos ")
+                .append(" SET descricao = '")
+                .append(produto.getDescricao())
+                .append("', precoVenda = '")
+                .append(produto.getPrecoVenda())
+                .append("', precoCusto = '")
+                .append(produto.getPrecoCusto())
+                .append("', tipoProduto = '")
+                .append(produto.getTipoProduto())
+                .append("' WHERE id = ")
+                .append(produto.getId());
+
+        bancoDados.execSQL(sql.toString());
 
     }
 
     @Override
     public void excluir(Produto produto) {
+        String sql = new StringBuilder("DELETE FROM produtos WHERE id = ")
+                .append(produto.getId())
+                .toString();
+
+        bancoDados.execSQL(sql);
 
     }
 

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App_pizzaria" >
         <activity
-            android:name=".produto.listProdutoActivity"
+            android:name=".produto.ListaProdutoActivity"
             android:label="@string/title_activity_list_produto"
             android:theme="@style/Theme.App_pizzaria.NoActionBar" >
         </activity>

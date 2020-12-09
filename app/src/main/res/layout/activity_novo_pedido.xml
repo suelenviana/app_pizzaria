@@ -22,7 +22,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -34,13 +34,11 @@
         android:layout_marginTop="20dp"
         android:text="@string/novoPedido_usuario" />
 
-    <EditText
-        android:layout_width="wrap_content"
+    <Spinner
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="0dp"
-        android:width="300dp"
-        android:inputType="text"></EditText>
+        android:id="@+id/spinnerUsuario"></Spinner>
 
 
     <TextView
@@ -51,15 +49,83 @@
         android:layout_marginTop="10dp"
         android:text="@string/novoPedido_produto" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:width="300dp"
-        android:inputType="textEmailAddress"></EditText>
-    </LinearLayout>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/spinnerItem"></Spinner>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/novoPedido_formaPagamento" />
+
+        <RadioGroup
+            android:id="@+id/formaPagamento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/text"
+            android:layout_marginLeft="15dp"
+            android:checkedButton="@+id/sound">
+
+            <RadioButton
+                android:id="@+id/pagDinheiro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/novoPedido_tpDinheiro" />
+
+            <RadioButton
+                android:id="@+id/pagCartao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/novoPedido_tpCartao" />
+
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/novoPedido_realizarEntrega" />
+
+        <RadioGroup
+            android:id="@+id/realizarEntrega"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/text"
+            android:layout_marginLeft="15dp"
+            android:checkedButton="@+id/sound">
+
+            <RadioButton
+                android:id="@+id/entregaSim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sim" />
+
+            <RadioButton
+                android:id="@+id/entregaNao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nao" />
+
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+        <ListView
+            android:id="@+id/listaItens"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_weight="1"></ListView>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

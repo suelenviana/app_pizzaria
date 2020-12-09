@@ -46,9 +46,11 @@
 
     <string name="novoPedido_usuario">Selecione o Usuário</string>
     <string name="novoPedido_produto">Selecione o Item</string>
-
-
-
-
+    <string name="novoPedido_formaPagamento">Selecione a forma de pagamento:</string>
+    <string name="novoPedido_tpDinheiro">Dinheiro</string>
+    <string name="novoPedido_tpCartao">Cartão</string>
+    <string name="novoPedido_realizarEntrega">Realizar entrega:</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 
 </resources>

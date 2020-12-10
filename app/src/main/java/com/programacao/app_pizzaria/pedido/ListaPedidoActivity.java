@@ -77,4 +77,8 @@ public class ListaPedidoActivity extends AppCompatActivity implements DataTransf
     public void onEditar(Pedido pedido) {
 
     }
+
+    @Override
+    public void onExcluir(Pedido pedido) {
+    }
 }

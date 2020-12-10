@@ -53,6 +53,11 @@ public class ListaProdutoActivity extends AppCompatActivity implements DataTrans
 
         startActivityForResult(intent, Util.REQUEST_CODE_EDITAR);
     }
+
+    @Override
+    public void onExcluir(Produto produto) {
+    }
+
     public void listarProdutos() {
         // Limpar a lista
         adapter.clear();

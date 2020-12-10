@@ -20,13 +20,14 @@ import com.programacao.app_pizzaria.usuario.ListaUsuarioActivity;
 import com.programacao.app_pizzaria.usuario.UsuarioDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PedidoAdapter extends ArrayAdapter<Pedido> {
 
     DataTransferInterface dtInterface;
 
     public PedidoAdapter(@NonNull Context context) {
-        super(context, R.layout.activity_lista_pedido, new ArrayList<>());
+        super(context, R.layout.pedido, new ArrayList<>());
         this.dtInterface = (DataTransferInterface) context;
     }
 
@@ -40,7 +41,13 @@ public class PedidoAdapter extends ArrayAdapter<Pedido> {
 
         Pedido pedido = getItem(position);
 
+        List<PedidoItem> itens = PedidoDAO.getInstance().listarPedidoItensPorPedidoId(pedido.getId());
+        StringBuilder nomesProdutos = new StringBuilder();
 
+        for (PedidoItem i : itens) {
+            nomesProdutos.append(i.getNomeProduto())
+                    .append("; ");
+        }
         TextView idPedido = view.findViewById(R.id.idPedido);
         TextView itemPedido = view.findViewById(R.id.itemPedido);
         TextView formaPagamento = view.findViewById(R.id.FormaPagamento);
@@ -48,7 +55,7 @@ public class PedidoAdapter extends ArrayAdapter<Pedido> {
         TextView nomeUsuario = view.findViewById(R.id.nomeUsuario);
 
         idPedido.setText(String.valueOf(pedido.getId()));
-        itemPedido.setText("So Deus sabe");
+        itemPedido.setText(nomesProdutos);
         formaPagamento.setText(pedido.getFormaPagamento());
         teleEntrega.setText(pedido.getRealizarEntrega());
         nomeUsuario.setText(pedido.getNomeUsuario());

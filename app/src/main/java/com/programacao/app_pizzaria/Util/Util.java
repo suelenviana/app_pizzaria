@@ -32,6 +32,8 @@ public class Util {
     public static final String CADUSUARIO_SALVAR_SUCESSO = "Usuário salvo com sucesso!";
     public static final String CADUSUARIO_ATUALIZAR_SUCESSO = "Usuário atualizado com sucesso!";
 
+    public static final String CADPEDIDO_SALVAR_SUCESSO = "Pedido salvo com sucesso!";
+
     public static final String MSG_TITULO = "Confirmação";
     public static final String MSG_SIM = "Sim";
     public static final String MSG_NAO = "Não";

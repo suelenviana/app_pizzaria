@@ -33,7 +33,7 @@ public class ListaUsuarioActivity extends AppCompatActivity implements DataTrans
     private void inicializarListView() {
         adapter = new UsuarioAdapter(this);
         adapter.clear();
-        ListView listView = findViewById(R.id.listProduto);
+        ListView listView = findViewById(R.id.listUsuario);
         listView.setAdapter(adapter);
         usuarioList = new ArrayList<Usuario>();
         usuarioList = UsuarioDAO.getInstance().listar();
@@ -65,6 +65,10 @@ public class ListaUsuarioActivity extends AppCompatActivity implements DataTrans
         intent.putExtra("emEdicao", true);
 
         startActivityForResult(intent, Util.REQUEST_CODE_EDITAR);
+    }
+
+    @Override
+    public void onExcluir(Usuario usuario) {
     }
 
     @Override

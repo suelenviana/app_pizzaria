@@ -112,6 +112,25 @@ public class PedidoDAO implements DAO<Pedido> {
         return listItensPedido;
     }
 
+    public List<PedidoItem> listarPedidoItensPorPedidoId(int idPedido) {
+        Cursor cursor = bancoDados.rawQuery(" SELECT id, nomeproduto, idpedido FROM pedidoitem WHERE idpedido = " + idPedido, null);
+        List<PedidoItem> itens = new ArrayList<>();
+
+        if (cursor != null && cursor.getCount() > 0) {
+            int iId = cursor.getColumnIndex("id");
+            int iNomeProduto = cursor.getColumnIndex("nomeproduto");
+            int iIdPedido = cursor.getColumnIndex("idpedido");
+            while (cursor.moveToNext()) {
+                PedidoItem item = new PedidoItem();
+                item.setId(cursor.getInt(iId));
+                item.setNomeProduto(cursor.getString(iNomeProduto));
+                item.setIdPedido(cursor.getInt(iIdPedido));
+                itens.add(item);
+            }
+        }
+        return itens;
+    }
+
     @Override
     public void atualizar(Pedido pedido) {
         StringBuilder sql = new StringBuilder("UPDATE pedidos ")

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.programacao.app_pizzaria.MainActivity;
 import com.programacao.app_pizzaria.R;
+import com.programacao.app_pizzaria.Util.DataTransferInterface;
 import com.programacao.app_pizzaria.Util.Util;
 import com.programacao.app_pizzaria.produto.Produto;
 import com.programacao.app_pizzaria.produto.ProdutoDAO;
@@ -27,7 +28,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class novoPedidoActivity extends AppCompatActivity {
+public class novoPedidoActivity extends AppCompatActivity implements DataTransferInterface {
 
     Button btSalvar, btLimpar, btCancelar;
     Intent intent;
@@ -36,7 +37,7 @@ public class novoPedidoActivity extends AppCompatActivity {
     RadioGroup groupPagamento;
     RadioGroup groupEntrega;
     List<String> produtosSelecionados;
-    ArrayAdapter<String> adapterProduto;
+    NomeProdutoAdapter adapterProduto;
     String nomeUsuario = "";
 
     @Override
@@ -55,7 +56,8 @@ public class novoPedidoActivity extends AppCompatActivity {
         groupPagamento = findViewById(R.id.formaPagamento);
 
         produtosSelecionados = new ArrayList<>();
-        adapterProduto = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, produtosSelecionados);
+        adapterProduto = new NomeProdutoAdapter(this, produtosSelecionados);
+        adapterProduto.clear();
         listaItens.setAdapter(adapterProduto);
         adapterProduto.notifyDataSetChanged();
         List<Usuario> usuarios = UsuarioDAO.getInstance().listar();
@@ -106,6 +108,8 @@ public class novoPedidoActivity extends AppCompatActivity {
     private void salvar() {
         int idPedido = salvarPedido();
         salvarItens(idPedido);
+        limpar();
+        Util.getInstance().mostraMensagemSnackBar(findViewById(R.id.activity_novo_pedido), Util.CADPEDIDO_SALVAR_SUCESSO);
     }
 
     private int salvarPedido() {
@@ -144,6 +148,15 @@ public class novoPedidoActivity extends AppCompatActivity {
         }
     }
 
+    public void limpar() {
+        spinnerUsuario.setSelection(0);
+        spinnerItem.setSelection(0);
+        groupEntrega.check(-1);
+        groupPagamento.check(-1);
+        produtosSelecionados.clear();
+        adapterProduto.notifyDataSetChanged();
+    }
+
     public void onClick(View v) {
         final int id = v.getId();
         switch (id) {
@@ -151,10 +164,22 @@ public class novoPedidoActivity extends AppCompatActivity {
                 salvar();
                 break;
             case R.id.btLimpar:
+                limpar();
                 break;
             case R.id.btCancelar:
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onEditar(Object o) {
+    }
+
+    @Override
+    public void onExcluir(Object o) {
+        int position = (int) o;
+        produtosSelecionados.remove(position);
+        adapterProduto.notifyDataSetChanged();
     }
 }

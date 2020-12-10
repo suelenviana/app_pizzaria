@@ -33,7 +33,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="170dp"
         android:background="#a1ede1"
-        android:textColor="#3abaa5"
+        android:textColor="#FFFFFF"
         android:onClick="onClick"
         android:text="@string/novoPedido" />
 
@@ -43,7 +43,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="#8cd9f5"
-        android:textColor="#3abaa5"
+        android:textColor="#FFFFFF"
         android:onClick="onClick"
         android:text="@string/title_activity_list_pedidos" />
 
@@ -53,7 +53,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="#95d1f0"
-        android:textColor="#3abaa5"
+        android:textColor="#FFFFFF"
         android:onClick="onClick"
         android:text="@string/listProduto" />
 
@@ -63,7 +63,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="#95d1f0"
-        android:textColor="#3abaa5"
+        android:textColor="#FFFFFF"
         android:onClick="onClick"
         android:text="@string/listUsuario" />
 
@@ -73,7 +73,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="#f2948f"
-        android:textColor="#3abaa5"
+        android:textColor="#FFFFFF"
         android:onClick="onClick"
         android:text="@string/cadProduto"
         tools:ignore="OnClick" />
@@ -84,7 +84,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="#8cd9f5"
-        android:textColor="#3abaa5"
+        android:textColor="#FFFFFF"
         android:onClick="onClick"
         android:text="@string/cadUsuario" />
 

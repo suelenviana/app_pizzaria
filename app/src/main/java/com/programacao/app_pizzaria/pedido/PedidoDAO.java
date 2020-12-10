@@ -5,8 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.programacao.app_pizzaria.banco.ConexaoBancoDados;
 import com.programacao.app_pizzaria.banco.DAO;
+import com.programacao.app_pizzaria.produto.Produto;
+import com.programacao.app_pizzaria.usuario.Usuario;
 import com.programacao.app_pizzaria.usuario.UsuarioDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PedidoDAO implements DAO<Pedido> {
@@ -14,7 +17,7 @@ public class PedidoDAO implements DAO<Pedido> {
     private static SQLiteDatabase bancoDados = ConexaoBancoDados.getInstance();
     private static PedidoDAO instance;
 
-    public static PedidoDAO getInstance(){
+    public static PedidoDAO getInstance() {
         if (instance == null) return new PedidoDAO();
         return instance;
     }
@@ -52,7 +55,7 @@ public class PedidoDAO implements DAO<Pedido> {
         String sql = new StringBuilder("INSERT INTO pedidos (nomeusuario, formapagamento, teleentrega) VALUES (\"")
                 .append(pedido.getNomeUsuario()).append("\", \"")
                 .append(pedido.getFormaPagamento()).append("\", \"")
-                .append(pedido.isRealizarEntrega()).append("\")")
+                .append(pedido.getRealizarEntrega()).append("\")")
                 .toString();
 
         bancoDados.execSQL(sql);
@@ -76,7 +79,35 @@ public class PedidoDAO implements DAO<Pedido> {
 
     @Override
     public List<Pedido> listar() {
-        return null;
+        Cursor cursor = bancoDados.rawQuery(" SELECT id,formapagamento, teleentrega FROM pedidos", null);
+        List<Pedido> listPedido = new ArrayList<>();
+        if (cursor != null && cursor.getCount() > 0) {
+            int iId = cursor.getColumnIndex("id");
+            int iFormaPagamento = cursor.getColumnIndex("formapagamento");
+            int iTeleEntrega = cursor.getColumnIndex("teleentrega");
+            while (cursor.moveToNext()) {
+                Pedido pedido = new Pedido();
+                pedido.setId(cursor.getInt(iId));
+                pedido.setFormaPagamento(cursor.getString(iFormaPagamento));
+                pedido.setRealizarEntrega(cursor.getString(iTeleEntrega));
+                listPedido.add(pedido);
+            }
+        }
+        return listPedido;
+    }
+
+    public List<String> listarItensPedido() {
+        Cursor cursor = bancoDados.rawQuery(" SELECT nomeproduto FROM pedidoitem", null);
+        List<String> listItensPedido = new ArrayList<>();
+        if (cursor != null && cursor.getCount() > 0) {
+            int iId = cursor.getColumnIndex("id");
+            int inomeProduto = cursor.getColumnIndex("nomeproduto");
+            while (cursor.moveToNext()) {
+                listItensPedido.add(null);
+
+            }
+        }
+        return listItensPedido;
     }
 
     @Override
@@ -87,7 +118,7 @@ public class PedidoDAO implements DAO<Pedido> {
                 .append("', formapagamento = '")
                 .append(pedido.getFormaPagamento())
                 .append("', teleentrega = '")
-                .append(pedido.isRealizarEntrega())
+                .append(pedido.getRealizarEntrega())
                 .append("' WHERE id = ")
                 .append(pedido.getId());
 

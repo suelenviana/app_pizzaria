@@ -5,7 +5,7 @@ public class Pedido {
     private int id;
     private String nomeUsuario;
     private String formaPagamento;
-    private boolean realizarEntrega;
+    private String realizarEntrega;
 
     public int getId() {
         return id;
@@ -31,11 +31,12 @@ public class Pedido {
         this.formaPagamento = formaPagamento;
     }
 
-    public boolean isRealizarEntrega() {
+    public String getRealizarEntrega() {
         return realizarEntrega;
     }
 
-    public void setRealizarEntrega(boolean realizarEntrega) {
+    public void setRealizarEntrega(String realizarEntrega) {
         this.realizarEntrega = realizarEntrega;
     }
+
 }

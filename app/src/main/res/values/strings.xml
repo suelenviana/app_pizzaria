@@ -44,6 +44,11 @@
     <string name="listUsuario_telefone">Telefone: </string>
     <string name="listUsuario_funcao">Função: </string>
 
+    <string name="listPedido_id">Código Pedido: </string>
+    <string name="listPedido_itens">Itens: </string>
+    <string name="listPedido_tipoPagamento">Condição de Pagamento: </string>
+    <string name="listPedido_teleEntrega">Tele Entrega: </string>
+
     <string name="novoPedido_usuario">Selecione o Usuário</string>
     <string name="novoPedido_produto">Selecione o Item</string>
     <string name="novoPedido_formaPagamento">Selecione a forma de pagamento:</string>

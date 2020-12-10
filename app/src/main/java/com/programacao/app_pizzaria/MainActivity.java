@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.programacao.app_pizzaria.banco.ConexaoBancoDados;
+import com.programacao.app_pizzaria.pedido.ListaPedidoActivity;
 import com.programacao.app_pizzaria.pedido.Pedido;
 import com.programacao.app_pizzaria.pedido.PedidoDAO;
 import com.programacao.app_pizzaria.pedido.novoPedidoActivity;
@@ -26,7 +27,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btNovoPedido, btCadProduto, btListProduto, btCadUsuario, btListUsuario;
+    Button btNovoPedido, btCadProduto, btListProduto, btCadUsuario, btListUsuario, btPedido;
     Intent intent;
     private SQLiteDatabase bancoDados;
 
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         btListProduto = findViewById(R.id.button_listProduto);
         btCadUsuario = findViewById(R.id.button_cadUsuario);
         btListUsuario = findViewById(R.id.button_listUsuario);
+        btPedido = findViewById(R.id.button_listPedido);
         ProdutoDAO.getInstance().criarTabela();
         UsuarioDAO.getInstance().criarTabela();
         PedidoDAO.getInstance().criarTabela();
@@ -69,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.button_cadUsuario:
                 intent = new Intent(MainActivity.this, cadUsuarioActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.button_listPedido:
+                intent = new Intent(MainActivity.this, ListaPedidoActivity.class);
                 startActivity(intent);
                 break;
         }

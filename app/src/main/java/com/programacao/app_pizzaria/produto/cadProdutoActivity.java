@@ -77,10 +77,9 @@ public class cadProdutoActivity extends AppCompatActivity {
             produto.setPrecoVenda(precoVenda);
             produto.setPrecoCusto(precoCusto);
             produto.setTipoProduto(tipoProduto);
-            System.out.println("Produto salvo");
             ProdutoDAO.getInstance().atualizar(produto);
             limpar();
-            Util.getInstance().mostraMensagem(getBaseContext(), Util.CADPRODUTO_SALVAR_SUCESSO);
+            Util.getInstance().mostraMensagem(getBaseContext(), Util.CADPRODUTO_ATUALIZAR_SUCESSO);
             intent = new Intent();
             setResult(RESULT_OK, intent);
             finish();
@@ -91,11 +90,9 @@ public class cadProdutoActivity extends AppCompatActivity {
             produto.setPrecoCusto(precoCusto);
             produto.setTipoProduto(tipoProduto);
             if (validaProduto(produto)) {
-                System.out.println("Produto salvo");
                 ProdutoDAO.getInstance().adicionar(produto);
                 limpar();
-                Util.getInstance().mostraMensagemSnackBar(findViewById(R.id.activity_cad_usuario), Util.CADPRODUTO_ATUALIZAR_SUCESSO);
-                //insert aqui.
+                Util.getInstance().mostraMensagemSnackBar(findViewById(R.id.activity_cad_produto), Util.CADPRODUTO_SALVAR_SUCESSO);
             }
         }
     }

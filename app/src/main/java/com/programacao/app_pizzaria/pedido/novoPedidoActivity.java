@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.programacao.app_pizzaria.MainActivity;
 import com.programacao.app_pizzaria.R;
+import com.programacao.app_pizzaria.Util.Util;
 import com.programacao.app_pizzaria.produto.Produto;
 import com.programacao.app_pizzaria.produto.ProdutoDAO;
 import com.programacao.app_pizzaria.usuario.Usuario;
@@ -133,13 +134,13 @@ public class novoPedidoActivity extends AppCompatActivity {
         return r.getText().toString();
     }
 
-    private boolean getRealizarEntrega() {
+    private String getRealizarEntrega() {
         RadioButton r = findViewById(groupEntrega.getCheckedRadioButtonId());
         int i = groupEntrega.indexOfChild(r);
         if (i == 0) {
-            return true;
+            return Util.MSG_SIM;
         } else {
-            return false;
+            return Util.MSG_NAO;
         }
     }
 

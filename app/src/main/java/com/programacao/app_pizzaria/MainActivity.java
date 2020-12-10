@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.programacao.app_pizzaria.banco.ConexaoBancoDados;
+import com.programacao.app_pizzaria.pedido.Pedido;
+import com.programacao.app_pizzaria.pedido.PedidoDAO;
 import com.programacao.app_pizzaria.pedido.novoPedidoActivity;
 import com.programacao.app_pizzaria.produto.ProdutoDAO;
 import com.programacao.app_pizzaria.produto.cadProdutoActivity;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         btListUsuario = findViewById(R.id.button_listUsuario);
         ProdutoDAO.getInstance().criarTabela();
         UsuarioDAO.getInstance().criarTabela();
+        PedidoDAO.getInstance().criarTabela();
 
     }
 

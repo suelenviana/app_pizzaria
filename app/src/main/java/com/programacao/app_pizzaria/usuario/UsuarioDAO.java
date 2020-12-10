@@ -37,7 +37,7 @@ public class UsuarioDAO implements DAO<Usuario> {
 
     @Override
     public void adicionar(Usuario usuario) {
-        String sql = new StringBuilder("INSERT INTO usuarios(nomecompleto, email, telefone, funcao) VALUES (\"")
+        String sql = new StringBuilder("INSERT INTO usuarios (nomecompleto, email, telefone, funcao) VALUES (\"")
                 .append(usuario.getNome()).append("\", \"")
                 .append(usuario.getEmail()).append("\", \"")
                 .append(usuario.getTelefone()).append("\", \"")

@@ -19,6 +19,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -30,8 +32,11 @@ public class novoPedidoActivity extends AppCompatActivity {
     Intent intent;
     Spinner spinnerUsuario, spinnerItem;
     ListView listaItens;
+    RadioGroup groupPagamento;
+    RadioGroup groupEntrega;
     List<String> produtosSelecionados;
     ArrayAdapter<String> adapterProduto;
+    String nomeUsuario = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,8 @@ public class novoPedidoActivity extends AppCompatActivity {
         spinnerUsuario = findViewById(R.id.spinnerUsuario);
         spinnerItem = findViewById(R.id.spinnerItem);
         listaItens = findViewById(R.id.listaItens);
+        groupEntrega = findViewById(R.id.realizarEntrega);
+        groupPagamento = findViewById(R.id.formaPagamento);
 
         produtosSelecionados = new ArrayList<>();
         adapterProduto = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, produtosSelecionados);
@@ -58,7 +65,17 @@ public class novoPedidoActivity extends AppCompatActivity {
         ArrayAdapter<String> adapterUsuario = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, nomesUsuario);
         adapterUsuario.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerUsuario.setAdapter(adapterUsuario);
+        spinnerUsuario.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                nomeUsuario = adapterView.getItemAtPosition(i).toString();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         List<Produto> produtos = ProdutoDAO.getInstance().listar();
         List<String> nomesProdutos = new ArrayList<>();
         nomesProdutos.add("");
@@ -85,10 +102,52 @@ public class novoPedidoActivity extends AppCompatActivity {
         });
     }
 
+    private void salvar() {
+        int idPedido = salvarPedido();
+        salvarItens(idPedido);
+    }
+
+    private int salvarPedido() {
+        Pedido pedido = new Pedido();
+        pedido.setNomeUsuario(this.nomeUsuario);
+        pedido.setFormaPagamento(getFormaPagamento());
+        pedido.setRealizarEntrega(getRealizarEntrega());
+
+        int id = PedidoDAO.getInstance().adicionarPedido(pedido);
+        return id;
+    }
+
+    private void salvarItens(int idPedido) {
+        for(String p : produtosSelecionados) {
+            PedidoItem item = new PedidoItem();
+            item.setNomeProduto(p);
+            item.setIdPedido(idPedido);
+
+            PedidoDAO.getInstance().adicionarPedidoItem(item);
+        }
+
+    }
+
+    private String getFormaPagamento() {
+        RadioButton r = findViewById(groupPagamento.getCheckedRadioButtonId());
+        return r.getText().toString();
+    }
+
+    private boolean getRealizarEntrega() {
+        RadioButton r = findViewById(groupEntrega.getCheckedRadioButtonId());
+        int i = groupEntrega.indexOfChild(r);
+        if (i == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void onClick(View v) {
         final int id = v.getId();
         switch (id) {
             case R.id.btSalvar:
+                salvar();
                 break;
             case R.id.btLimpar:
                 break;

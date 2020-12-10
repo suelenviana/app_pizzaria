@@ -43,6 +43,7 @@ public class PedidoAdapter extends ArrayAdapter<Pedido> {
 
         List<PedidoItem> itens = PedidoDAO.getInstance().listarPedidoItensPorPedidoId(pedido.getId());
         StringBuilder nomesProdutos = new StringBuilder();
+        pedido.setItens(itens);
 
         for (PedidoItem i : itens) {
             nomesProdutos.append(i.getNomeProduto())
@@ -73,6 +74,7 @@ public class PedidoAdapter extends ArrayAdapter<Pedido> {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 PedidoDAO.getInstance().excluir(pedido);
+                                PedidoDAO.getInstance().removerItensPorIdPedido(pedido.getId());
                                 ListaPedidoActivity activity = (ListaPedidoActivity) getContext();
                                 activity.listarPedidos();
                                 Util.getInstance().mostraMensagem(activity.getBaseContext(), Util.MSG_EXCLUIDO);
@@ -80,6 +82,13 @@ public class PedidoAdapter extends ArrayAdapter<Pedido> {
                         })
                         .setNegativeButton(Util.MSG_NAO, null)
                         .show();
+            }
+        });
+
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dtInterface.onEditar(pedido);
             }
         });
 

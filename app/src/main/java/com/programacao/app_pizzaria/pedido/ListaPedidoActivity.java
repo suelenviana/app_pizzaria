@@ -66,16 +66,28 @@ public class ListaPedidoActivity extends AppCompatActivity implements DataTransf
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == Util.REQUEST_CODE_EDITAR) {
-//            if (resultCode == RESULT_OK) {
-//                listarPedidos();
-//            }
-//        }
+        if (requestCode == Util.REQUEST_CODE_EDITAR) {
+            if (resultCode == RESULT_OK) {
+                listarPedidos();
+            }
+        }
     }
 
     @Override
     public void onEditar(Pedido pedido) {
+        Intent intent = new Intent(ListaPedidoActivity.this, novoPedidoActivity.class);
+        ArrayList<String> itens = new ArrayList<>();
+        for (PedidoItem i : pedido.getItens()) {
+            itens.add(i.getNomeProduto());
+        }
+        intent.putExtra("id", pedido.getId());
+        intent.putExtra("nomeusuario", pedido.getNomeUsuario());
+        intent.putExtra("formapagamento", pedido.getFormaPagamento());
+        intent.putExtra("teleentrega", pedido.getRealizarEntrega());
+        intent.putStringArrayListExtra("itens", itens);
+        intent.putExtra("emEdicao", true);
 
+        startActivityForResult(intent, Util.REQUEST_CODE_EDITAR);
     }
 
     @Override

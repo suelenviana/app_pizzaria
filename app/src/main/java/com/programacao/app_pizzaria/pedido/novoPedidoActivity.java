@@ -1,5 +1,6 @@
 package com.programacao.app_pizzaria.pedido;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -36,9 +37,13 @@ public class novoPedidoActivity extends AppCompatActivity implements DataTransfe
     ListView listaItens;
     RadioGroup groupPagamento;
     RadioGroup groupEntrega;
+    RadioButton pagButton;
+    RadioButton entregaButton;
     List<String> produtosSelecionados;
     NomeProdutoAdapter adapterProduto;
     String nomeUsuario = "";
+    Pedido pedido;
+    boolean emEdicao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,23 +108,60 @@ public class novoPedidoActivity extends AppCompatActivity implements DataTransfe
 
             }
         });
+
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", 0);
+        String nomeUsuario = intent.getStringExtra("nomeusuario");
+        String formaPagamento = intent.getStringExtra("formapagamento");
+        String teleEntrega = intent.getStringExtra("teleentrega");
+        ArrayList<String> itens = intent.getStringArrayListExtra("itens");
+        emEdicao = intent.getBooleanExtra("emEdicao", false);
+
+        if (emEdicao) {
+            pedido = new Pedido();
+            pedido.setId(id);
+            pedido.setNomeUsuario(nomeUsuario);
+            pedido.setFormaPagamento(formaPagamento);
+            pedido.setRealizarEntrega(teleEntrega);
+            produtosSelecionados.addAll(itens);
+            preencherCamposEmEdicao(pedido);
+        }
     }
 
     private void salvar() {
-        int idPedido = salvarPedido();
-        salvarItens(idPedido);
-        limpar();
-        Util.getInstance().mostraMensagemSnackBar(findViewById(R.id.activity_novo_pedido), Util.CADPEDIDO_SALVAR_SUCESSO);
+        if (emEdicao) {
+            atualizarPedido();
+            atualizarItens(pedido.getId());
+            limpar();
+            Util.getInstance().mostraMensagem(this, Util.CADPEDIDO_ATUALIZAR_SUCESSO);
+            intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        } else {
+            int idPedido = salvarPedido();
+            salvarItens(idPedido);
+            limpar();
+            Util.getInstance().mostraMensagemSnackBar(findViewById(R.id.activity_novo_pedido), Util.CADPEDIDO_SALVAR_SUCESSO);
+        }
     }
 
     private int salvarPedido() {
-        Pedido pedido = new Pedido();
+        pedido = new Pedido();
         pedido.setNomeUsuario(this.nomeUsuario);
         pedido.setFormaPagamento(getFormaPagamento());
         pedido.setRealizarEntrega(getRealizarEntrega());
 
         int id = PedidoDAO.getInstance().adicionarPedido(pedido);
         return id;
+    }
+
+    private int atualizarPedido() {
+        pedido.setNomeUsuario(this.nomeUsuario);
+        pedido.setFormaPagamento(getFormaPagamento());
+        pedido.setRealizarEntrega(getRealizarEntrega());
+
+        PedidoDAO.getInstance().atualizar(pedido);
+        return pedido.getId();
     }
 
     private void salvarItens(int idPedido) {
@@ -130,7 +172,17 @@ public class novoPedidoActivity extends AppCompatActivity implements DataTransfe
 
             PedidoDAO.getInstance().adicionarPedidoItem(item);
         }
+    }
 
+    private void atualizarItens(int idPedido) {
+        PedidoDAO.getInstance().removerItensPorIdPedido(idPedido);
+        for(String p : produtosSelecionados) {
+            PedidoItem item = new PedidoItem();
+            item.setNomeProduto(p);
+            item.setIdPedido(idPedido);
+
+            PedidoDAO.getInstance().adicionarPedidoItem(item);
+        }
     }
 
     private String getFormaPagamento() {
@@ -181,5 +233,24 @@ public class novoPedidoActivity extends AppCompatActivity implements DataTransfe
         int position = (int) o;
         produtosSelecionados.remove(position);
         adapterProduto.notifyDataSetChanged();
+    }
+
+    @SuppressLint("ResourceType")
+    public void preencherCamposEmEdicao(Pedido pedido) {
+        if (pedido.getFormaPagamento().equals(Util.CADPEDIDO_PAGAMENTO_DINHEIRO)) {
+            pagButton = findViewById(groupPagamento.getChildAt(0).getId());
+            pagButton.setChecked(true);
+        } else {
+            pagButton = findViewById(groupPagamento.getChildAt(1).getId());
+            pagButton.setChecked(true);
+        }
+
+        if (pedido.getRealizarEntrega().equals(Util.MSG_SIM)) {
+            entregaButton = findViewById(groupEntrega.getChildAt(0).getId());
+            entregaButton.setChecked(true);
+        } else {
+            entregaButton = findViewById(groupEntrega.getChildAt(1).getId());
+            entregaButton.setChecked(true);
+        }
     }
 }

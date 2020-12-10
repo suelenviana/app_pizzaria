@@ -146,6 +146,14 @@ public class PedidoDAO implements DAO<Pedido> {
         bancoDados.execSQL(sql.toString());
     }
 
+    public void removerItensPorIdPedido(int idPedido) {
+        String sql = new StringBuilder("DELETE FROM pedidoitem WHERE idpedido = ")
+                .append(idPedido)
+                .toString();
+
+        bancoDados.execSQL(sql.toString());
+    }
+
     @Override
     public void excluir(Pedido pedido) {
         String sql = new StringBuilder("DELETE FROM pedidos WHERE id = ")

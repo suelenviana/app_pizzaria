@@ -1,11 +1,14 @@
 package com.programacao.app_pizzaria.pedido;
 
+import java.util.List;
+
 public class Pedido {
 
     private int id;
     private String nomeUsuario;
     private String formaPagamento;
     private String realizarEntrega;
+    private List<PedidoItem> itens;
 
     public int getId() {
         return id;
@@ -37,6 +40,14 @@ public class Pedido {
 
     public void setRealizarEntrega(String realizarEntrega) {
         this.realizarEntrega = realizarEntrega;
+    }
+
+    public List<PedidoItem> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<PedidoItem> itens) {
+        this.itens = itens;
     }
 
 }

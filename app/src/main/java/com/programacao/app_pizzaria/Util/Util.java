@@ -33,6 +33,8 @@ public class Util {
     public static final String CADUSUARIO_ATUALIZAR_SUCESSO = "Usuário atualizado com sucesso!";
 
     public static final String CADPEDIDO_SALVAR_SUCESSO = "Pedido salvo com sucesso!";
+    public static final String CADPEDIDO_ATUALIZAR_SUCESSO = "Pedido atualizado com sucesso!";
+    public static final String CADPEDIDO_PAGAMENTO_DINHEIRO = "Dinheiro";
 
     public static final String MSG_TITULO = "Confirmação";
     public static final String MSG_SIM = "Sim";

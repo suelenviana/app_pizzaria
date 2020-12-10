@@ -20,7 +20,24 @@
                 android:text="@string/listPedido_id"></TextView>
 
             <TextView
+                android:layout_marginLeft="3dp"
                 android:id="@+id/idPedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/listNome_usuario"></TextView>
+
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:id="@+id/nomeUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
         </LinearLayout>
@@ -35,6 +52,7 @@
                 android:text="@string/listPedido_itens"></TextView>
 
             <TextView
+                android:layout_marginLeft="3dp"
                 android:id="@+id/itemPedido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
@@ -50,6 +68,7 @@
                 android:text="@string/listPedido_tipoPagamento"></TextView>
 
             <TextView
+                android:layout_marginLeft="3dp"
                 android:id="@+id/FormaPagamento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
@@ -65,10 +84,34 @@
                 android:text="@string/listPedido_teleEntrega"></TextView>
 
             <TextView
+                android:layout_marginLeft="3dp"
                 android:id="@+id/teleEntrega"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></TextView>
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+        <ImageButton
+            android:id="@+id/editar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/ic_menu_edit"
+            android:tint="@color/yellow"
+            android:backgroundTint="@color/white">
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/excluir"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/ic_delete"
+            android:backgroundTint="@color/white">
+        </ImageButton>
     </LinearLayout>
 
 </LinearLayout>

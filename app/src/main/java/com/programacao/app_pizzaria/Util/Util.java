@@ -38,6 +38,7 @@ public class Util {
     public static final String MSG_EXCLUIDO = "Excluido!";
     public static final String MSG_EXCLUIR_USUARIO = "Deseja excluir o usuário?";
     public static final String MSG_EXCLUIR_PRODUTO = "Deseja excluir o Produto?";
+    public static final String MSG_EXCLUIR_PEDIDO = "Deseja excluir o Pedido?";
 
     public static final int REQUEST_CODE_EDITAR = 1;
 

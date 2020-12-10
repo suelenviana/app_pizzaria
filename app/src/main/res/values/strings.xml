@@ -45,6 +45,7 @@
     <string name="listUsuario_funcao">Função: </string>
 
     <string name="listPedido_id">Código Pedido: </string>
+    <string name="listNome_usuario">Nome do Usuário: </string>
     <string name="listPedido_itens">Itens: </string>
     <string name="listPedido_tipoPagamento">Condição de Pagamento: </string>
     <string name="listPedido_teleEntrega">Tele Entrega: </string>

@@ -35,7 +35,7 @@ public class ListaPedidoActivity extends AppCompatActivity implements DataTransf
        // setSupportActionBar(toolbar);
 
         inicializarListView();
-        listarUsuarios();
+        listarPedidos();
     }
 
     private void inicializarListView() {
@@ -48,12 +48,12 @@ public class ListaPedidoActivity extends AppCompatActivity implements DataTransf
         adapter.notifyDataSetChanged();
     }
 
-    public void listarUsuarios() {
+    public void listarPedidos() {
         // Limpar a lista
         adapter.clear();
 
         // Pego os contatos do banco
-        List<Pedido> pedidos = pedidoList = PedidoDAO.getInstance().listar();
+        List<Pedido> pedidos = PedidoDAO.getInstance().listar();
 
 
         // Adicionar os contatos ao adapter
@@ -68,7 +68,7 @@ public class ListaPedidoActivity extends AppCompatActivity implements DataTransf
         super.onActivityResult(requestCode, resultCode, data);
 //        if (requestCode == Util.REQUEST_CODE_EDITAR) {
 //            if (resultCode == RESULT_OK) {
-//                listarUsuarios();
+//                listarPedidos();
 //            }
 //        }
     }

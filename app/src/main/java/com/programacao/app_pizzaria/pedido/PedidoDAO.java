@@ -79,15 +79,17 @@ public class PedidoDAO implements DAO<Pedido> {
 
     @Override
     public List<Pedido> listar() {
-        Cursor cursor = bancoDados.rawQuery(" SELECT id,formapagamento, teleentrega FROM pedidos", null);
+        Cursor cursor = bancoDados.rawQuery(" SELECT id, nomeusuario, formapagamento, teleentrega FROM pedidos", null);
         List<Pedido> listPedido = new ArrayList<>();
         if (cursor != null && cursor.getCount() > 0) {
             int iId = cursor.getColumnIndex("id");
+            int iNomeUsuario = cursor.getColumnIndex("nomeusuario");
             int iFormaPagamento = cursor.getColumnIndex("formapagamento");
             int iTeleEntrega = cursor.getColumnIndex("teleentrega");
             while (cursor.moveToNext()) {
                 Pedido pedido = new Pedido();
                 pedido.setId(cursor.getInt(iId));
+                pedido.setNomeUsuario(cursor.getString(iNomeUsuario));
                 pedido.setFormaPagamento(cursor.getString(iFormaPagamento));
                 pedido.setRealizarEntrega(cursor.getString(iTeleEntrega));
                 listPedido.add(pedido);
